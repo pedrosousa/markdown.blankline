@@ -17,12 +17,10 @@ BLANKLINE_RE = r'\%\%'
 class BlankLineExtension(Extension):
     """Adds BLANKLINE_RE extension to Markdown class."""
     
-    def extendMarkdown(self, md, md_globals):
+    def extendMarkdown(self, md):
         """Modifies inline patterns."""
-        br_tag = SubstituteTagPattern(BLANKLINE_RE, 'br')
-        md.inlinePatterns.add('ble', br_tag, '_begin')
+        md.inlinePatterns.register(SubstituteTagPattern(BLANKLINE_RE, 'br'), 'ble', 200)
         
-
 
 def makeExtension(configs=None):
     return BlankLineExtension(configs)
